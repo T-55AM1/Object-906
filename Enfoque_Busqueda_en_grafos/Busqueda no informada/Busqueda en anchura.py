@@ -1,6 +1,4 @@
-
 from collections import deque # deque es una cola que sale de collections o colecciones
-
 
 def bfs(grafo, inicio, objetivo): #def bfs en una funcion de busqueda en anchura
                                   #y tenemos: (diccionario con conecciones, nodo inicial, nodo que buscamos)
@@ -17,11 +15,18 @@ def bfs(grafo, inicio, objetivo): #def bfs en una funcion de busqueda en anchura
         if nodo not in visitados: #vemos si ya lo visitamos
             visitados.add(nodo)   #si no lo marcamos
 
-        for vecino in grafo[nodo]: #recorremos los vecinos del nodo actual
-            cola.appened((vecino, camino + [Vecino])) #agregamos a la cola: el vecino y
+        for vecino in grafo.get(nodo, []): #recorremos los vecinos del nodo actual
+            cola.append((vecino, camino + [vecino])) #agregamos a la cola: el vecino y
                                                   # el nuevo camino
 
     return None #si no encuentra nada no hay solucion
 
-
-        
+#grafo en cuestion
+grafo = {
+    'APPLE_STORE': ['MACDONALS'],
+    'MACDONALS': ['ZONA_COMIDA', 'F_GUADALAGARA'],
+    'ZONA_COMIDA': ['GOMBILL', 'MINISO'],
+    'MINISO': ['KIDSANIA','PUMA','CHARLI'],
+    'GOMBILL': ['ESTACIONAMIENTO']
+}
+print("camino mas corto:", bfs(grafo,'APPLE_STORE','GOMBIL'))
